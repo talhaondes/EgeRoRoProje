@@ -10,8 +10,15 @@ namespace UI.Controllers
         FleetManager fleetManager = new FleetManager(new EfFleetDal());
         public IActionResult Index()
         {
-            var getir=fleetManager.FleetGetAll();   
+            var getir = fleetManager.FleetGetAll();
             return View(getir);
         }
+        public IActionResult Detail(int id)
+        {
+            var bul = fleetManager.FleetGetById(id); // ID ile getir
+            return View(bul);
+        }
+
+
     }
 }

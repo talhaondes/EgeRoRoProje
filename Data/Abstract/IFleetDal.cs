@@ -7,7 +7,7 @@ using Entity.Concrete;
 
 namespace Data.Abstract
 {
-    public interface IFleetDal:IGenericRepository<Fleet>
+    public interface IFleetDal : IGenericRepository<Fleet>
     {
     }
 }

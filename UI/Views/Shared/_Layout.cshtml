@@ -8,7 +8,7 @@
 		<a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a>
 	</div>
 
-	@await Html.PartialAsync("/Views/PartialView/_headerPartial.cshtml")
+	@await Component.InvokeAsync("_LayLayOut")
 	@RenderBody()
 	@await Html.PartialAsync("/Views/PartialView/_footerPartial.cshtml")
 	@await Html.PartialAsync("/Views/PartialView/_scriptPartial.cshtml")

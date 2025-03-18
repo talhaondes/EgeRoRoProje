@@ -17,5 +17,7 @@ namespace Entity.Concrete
         public string GemiBoy { get; set; }
         public string GemiGrt { get; set; }
         public string GemiDwt { get; set; }
+        public int Gemino { get; set; }
+
     }
 }

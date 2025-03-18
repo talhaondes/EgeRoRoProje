@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Data.Abstract;
+using Data.EF;
 using Entity.Concrete;
 
 namespace Business.Concrete
@@ -12,6 +13,7 @@ namespace Business.Concrete
     public class FleetManager : IFleetService
     {
         IFleetDal _fleetdal;
+
 
         public FleetManager(IFleetDal fleetdal)
         {
@@ -30,8 +32,15 @@ namespace Business.Concrete
 
         public Fleet FleetGetById(int id)
         {
-            return _fleetdal.GetById(id);
+            return _fleetdal.Get(f => f.FleetId == id);
         }
+
+
+        public Fleet FleetGetByName(string name)
+        {
+            return _fleetdal.Get(x => x.FiloBaslik == name);  
+        }
+
 
         public void FleetInsert(Fleet fleet)
         {

@@ -1,0 +1,70 @@
+﻿@using UI.Models
+@model ServiceDetailViewModel
+
+<section id="ft-breadcrumb" class="ft-breadcrumb-section position-relative" style="background-image: url('/ege roro/assets/img/bg/bread-bg.jpg');">
+	<span class="background_overlay"></span>
+	<span class="design-shape position-absolute"><img src="~/ege roro/assets/img/shape/tmd-sh.png" alt=""></span>
+	<div class="container">
+		<div class="ft-breadcrumb-content headline text-center position-relative">
+			<h2>Hakkımızda</h2>
+			<div class="ft-breadcrumb-list ul-li">
+				<ul>
+					<li><a href="/Service">Hakkımızda</a></li>
+					<li>Hakkımızda</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section id="ft-service-details" class="ft-service-details-section page-padding">
+	<div class="container">
+		<div class="ft-service-details-content">
+			<div class="row">
+				<!-- SOL TARAF: Hizmet Listesi -->
+				<div class="col-lg-4">
+					<div class="ft-service-sidebar">
+						<div class="ft-service-sidebar-widget headline ul-li-block">
+							<div class="service-category-widget">
+								<h3 class="widget-title">Hizmetlerimiz</h3>
+								<ul>
+									@foreach (var service in Model.AllServices)
+									{
+										<li>
+											<a href="/Service/Detail/@service.ServiceId">@service.HizmetAdi</a>
+										</li>
+									}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- SAĞ TARAF: Seçili Hizmet Detayı -->
+				<div class="col-lg-8">
+					<div class="ft-service-details-content-wrapper headline pera-content">
+						<div class="ft-service-details-img-wrapper">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="ft-service-details-img">
+										<a href="@Url.Content(Model.SelectedService.HizmetFoto)" class="lightbox-link">
+											<img src="@Url.Content(Model.SelectedService.HizmetFoto)" alt="">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ft-service-details-text-wrapper">
+							<h3>@Model.SelectedService.HizmetAdi</h3>
+							<p>@Model.SelectedService.HizmetDetay</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+

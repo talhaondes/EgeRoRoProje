@@ -1,0 +1,56 @@
+﻿@model dynamic
+
+<header id="ft-header" class="ft-header-section header-style-three">
+	<div class="container">
+		<div class="ft-header-content position-relative">
+			<div class="ft-header-top d-flex justify-content-end ul-li">
+				<ul>
+					<li><i class="far fa-envelope"></i> info@egeroro.com</li>
+				</ul>
+			</div>
+			<div class="ft-header-main-menu d-flex align-items-center justify-content-between">
+				<div class="ft-brand-logo">
+					<a href="/"><img src="~/ege roro/assets/img/logo/logo.svg" alt=""></a>
+				</div>
+				<div class="ft-header-main-menu-cta  d-flex align-items-center">
+					<nav class="ft-main-navigation clearfix ul-li">
+						<ul id="ft-main-nav" class="nav navbar-nav clearfix">
+							<li><a href="/">Ana Sayfa</a></li>
+							<li><a href="/About">Hakkımızda</a></li>
+
+							<li class="dropdown">
+								<a href="/Service">Hizmetlerimiz</a>
+								<ul class="dropdown-menu clearfix">
+									@foreach (var item in Model.Services)
+									{
+										<li><a href="/Service/Detail/@item.serviceId">@item.serviceName</a></li>
+									}
+								</ul>
+							</li>
+
+							<li class="dropdown">
+								<a href="/Fleet">Filomuz</a>
+								<ul class="dropdown-menu clearfix">
+									@foreach (var item in Model.Fleets)
+									{
+										<li><a href="/Fleet/Detail/@item.fleettId">@item.FiloBaslik</a></li>
+									}
+								</ul>
+							</li>
+
+
+							<li><a href="/Gallery">Galeri</a></li>
+							<li><a href="/Contact">İletişim</a></li>
+							<li><a href="#">EN</a></li>
+						</ul>
+					</nav>
+					<div class="ft-header-cta-btn">
+						<a class="d-flex justify-content-center align-items-center" href="#">
+							<i class="fas fa-phone-alt"></i> +90 (216) 384 88 91
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

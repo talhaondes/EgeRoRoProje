@@ -1,0 +1,56 @@
+﻿@using Entity.Concrete
+@model Fleet
+
+<!-- Burada List değil, sadece tek bir Fleet nesnesi bekliyoruz -->
+<section id="ft-breadcrumb" class="ft-breadcrumb-section position-relative" style="background-image: url('/ege roro/assets/img/bg/bread-bg.jpg');">
+	<span class="background_overlay"></span>
+	<span class="design-shape position-absolute"><img src="~/ege roro/assets/img/shape/tmd-sh.png" alt=""></span>
+	<div class="container">
+		<div class="ft-breadcrumb-content headline text-center position-relative">
+			<h2>Hakkımızda</h2>
+			<div class="ft-breadcrumb-list ul-li">
+				<ul>
+					<li><a href="/Service">Hakkımızda</a></li>
+					<li>Hakkımızda</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="ft-project-details" class="ft-project-details-section page-padding">
+	<div class="container">
+		<div class="ft-project-overview">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="ft-project-details-img">
+						<img src="@Url.Content(Model.GemiFoto)" alt="hizmet Fotoğrafı" style="width: 778px; height: 437px";>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="ft-portfolio-overview-text headline">
+						<div class="project-title-overview text-center">
+							<h3>Filo Bilgileri</h3>
+						</div>
+						<div class="ft-portfolio-overview-list-value">
+							<div class="ft-portfolio-overview-list ul-li-block">
+								<ul>
+									<li>Gemi Adı: <span>@Model.GemiAd </span></li>
+									<li>Bayrak: <span>@Model.GemiBayrak </span></li>
+									<li>Gemi Kapasite <span>@Model.GemiKapasite</span></li>
+									<li>Grt: <span>@Model.GemiGrt</span></li>
+									<li>Dwt: <span>@Model.GemiDwt</span></li>
+									<li>GemiBoy: <span>@Model.GemiBoy</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ft-project-overview-text-wrapper headline pera-content">
+					<h3>@Model.GemiAd</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

@@ -10,6 +10,5 @@ namespace Entity.Concrete
     {
         public int GalleryId { get; set; }
         public string galeriFoto { get; set; }
-        public string anasayfaFoto { get; set; }
     }
 }

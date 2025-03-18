@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Data.Abstract;
@@ -18,6 +19,12 @@ namespace Data.Repository
             db.SaveChanges();
         }
 
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            using var db = new Context();
+            return db.Set<T>().FirstOrDefault(filter);
+        }
+
         public List<T> GetAll()
         {
             using var ctx = new Context();
@@ -29,6 +36,8 @@ namespace Data.Repository
             using var db = new Context();
             return db.Set<T>().Find(id);
         }
+
+
 
         public void Insert(T entity)
         {

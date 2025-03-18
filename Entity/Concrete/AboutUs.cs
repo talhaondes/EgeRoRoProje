@@ -15,5 +15,8 @@ namespace Entity.Concrete
         public string HakkimizdaAciklama2 { get; set; }
         public string HakkimizdaFoto { get; set; }
         public string anasayfaFoto { get; set; }
+        public string koseFoto1 { get; set; }
+        public string koseFoto2 { get; set; }
+
     }
 }

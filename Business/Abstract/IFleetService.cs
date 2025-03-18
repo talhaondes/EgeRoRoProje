@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Concrete;
@@ -14,6 +15,7 @@ namespace Business.Abstract
         void FleetDelete(Fleet fleet);
         List<Fleet> FleetGetAll();
         Fleet FleetGetById(int id);
+        Fleet FleetGetByName(string name);
 
 
     }
