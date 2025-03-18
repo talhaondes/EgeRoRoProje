@@ -1,0 +1,51 @@
+﻿@using Entity.Concrete
+@model List<AboutUs>
+
+<section id="ft-about-2" class="ft-about-section-2">
+	<div class="container">
+		<div class="ft-about-content-2">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="ft-about-text-wrapper-2">
+						<div class="ft-section-title-2 headline pera-content">
+						 
+							<h2>
+								@Model.First().HakkimizdaBaslik1
+							</h2>
+
+							<p>
+								@Model.First().HakkimizdaAciklama1
+							</p>
+
+							<h2 class="mt-10">
+								@Model.First().HakkimizdaBaslik2
+
+							</h2>
+
+							<ul class="list-about">
+								<li>
+									@Model.First().HakkimizdaAciklama2
+								</li>
+					@* 			<li>Müşterisini tanıyan ve beklentilerini karşılayacak şekilde çalışan,</li>
+								<li>Değişen şartlara hızlı uyum sağlayan,</li>
+								<li>Verdiği hizmeti farklılaştırmak ve geliştirmek için çaba harcayan</li> *@
+							</ul>
+
+
+						</div>
+
+					</div> 
+				</div>
+				<div class="col-lg-6">
+					<div class="ft-about-img-2-wrapper position-relative">
+@* 						<span class="ft-about-shape1 position-absolute"><img src="assets/img/shape/ab-sh1.png" alt=""></span>
+						<span class="ft-about-shape2 position-absolute"><img src="~/ege roro/assets/img/shape/ab-sh2.png" alt=""></span> *@
+						<div class="ft-about-img-2">
+							<img src="@Url.Content(Model.First().HakkimizdaFoto)" alt="Hakkımızda Fotoğrafı">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

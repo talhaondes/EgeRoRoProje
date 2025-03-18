@@ -25,7 +25,8 @@ namespace Business.Concrete
 
         public List<Service> ServiceGetAll()
         {
-            return _servicedal.GetAll();
+            var result=_servicedal.GetAll();
+            return result;
         }
 
         public Service ServiceGetById(int id)

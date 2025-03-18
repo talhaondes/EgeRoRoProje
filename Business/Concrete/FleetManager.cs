@@ -9,11 +9,11 @@ using Entity.Concrete;
 
 namespace Business.Concrete
 {
-    public class FleetService : IFleetService
+    public class FleetManager : IFleetService
     {
         IFleetDal _fleetdal;
 
-        public FleetService(IFleetDal fleetdal)
+        public FleetManager(IFleetDal fleetdal)
         {
             _fleetdal = fleetdal;
         }
@@ -21,6 +21,16 @@ namespace Business.Concrete
         public void FleetDelete(Fleet fleet)
         {
             _fleetdal.Delete(fleet);
+        }
+
+        public List<Fleet> FleetGetAll()
+        {
+            return _fleetdal.GetAll();
+        }
+
+        public Fleet FleetGetById(int id)
+        {
+            return _fleetdal.GetById(id);
         }
 
         public void FleetInsert(Fleet fleet)

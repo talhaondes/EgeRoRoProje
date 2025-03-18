@@ -12,6 +12,9 @@ namespace Business.Abstract
         void FleetInsert(Fleet fleet);
         void FleetUpdate(Fleet fleet);
         void FleetDelete(Fleet fleet);
-      
+        List<Fleet> FleetGetAll();
+        Fleet FleetGetById(int id);
+
+
     }
 }

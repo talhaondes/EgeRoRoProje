@@ -9,11 +9,11 @@ using Entity.Concrete;
 
 namespace Business.Concrete
 {
-    public class GalleryService : IGalleryService
+    public class GalleryManager : IGalleryService
     {
         IGalleryDal _galleryDal;
 
-        public GalleryService(IGalleryDal galleryDal)
+        public GalleryManager(IGalleryDal galleryDal)
         {
             _galleryDal = galleryDal;
         }

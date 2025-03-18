@@ -9,7 +9,7 @@ using Entity.Concrete;
 
 namespace Business.Concrete
 {
-    internal class CrewManager : ICrewService
+    public class CrewManager : ICrewService
     {
         ICrewDal _ıcrewdal;
 
