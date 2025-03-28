@@ -1,15 +1,65 @@
+using Business.Abstract;
+using Business.Concrete;
+using Data.Abstract;
+using Data.Concrete;
+using Data.EF;
+using Data.Repository;
+using Entity.Concrete;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+ builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+ builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/";
+});
 
-// Configure the HTTP request pipeline.
+ builder.Services.AddDbContext<Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<Context>()
+    .AddDefaultTokenProviders();
+
+ 
+// AboutUs
+builder.Services.AddScoped<IAboutUsService, AboutUsManager>();
+builder.Services.AddScoped<IAboutUsDal, EfAboutUsDal>();
+
+// Contact
+builder.Services.AddScoped<IContactService, ContactManager>();
+builder.Services.AddScoped<IContactDal, EfContactDal>();
+
+// Fleet
+builder.Services.AddScoped<IFleetService, FleetManager>();
+builder.Services.AddScoped<IFleetDal, EfFleetDal>();
+
+// Gallery
+builder.Services.AddScoped<IGalleryService, GalleryManager>();
+builder.Services.AddScoped<IGalleryDal, EfGalleryDal>();
+
+// Service
+builder.Services.AddScoped<IServiceService, ServiceManager>();
+builder.Services.AddScoped<IServiceDal, EfServiceDal>();
+
+// Expertice
+builder.Services.AddScoped<IExperticeService, ExperticeManager>();
+builder.Services.AddScoped<IExperticeDal, EfExperticeDal>();
+
+// Crew
+builder.Services.AddScoped<ICrewService, CrewManager>();
+builder.Services.AddScoped<ICrewDal, EfCrewDal>();
+
+  
+ var app = builder.Build();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -18,9 +68,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
+ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 

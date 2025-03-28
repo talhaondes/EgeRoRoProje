@@ -1,4 +1,7 @@
 ﻿@model dynamic
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Entity.Concrete.ApplicationUser> SignInManager
+@inject UserManager<Entity.Concrete.ApplicationUser> UserManager
 
 <header id="ft-header" class="ft-header-section header-style-three">
 	<div class="container">
@@ -12,7 +15,7 @@
 				<div class="ft-brand-logo">
 					<a href="/"><img src="~/ege roro/assets/img/logo/logo.svg" alt=""></a>
 				</div>
-				<div class="ft-header-main-menu-cta  d-flex align-items-center">
+				<div class="ft-header-main-menu-cta d-flex align-items-center">
 					<nav class="ft-main-navigation clearfix ul-li">
 						<ul id="ft-main-nav" class="nav navbar-nav clearfix">
 							<li><a href="/">Ana Sayfa</a></li>
@@ -38,10 +41,10 @@
 								</ul>
 							</li>
 
-
 							<li><a href="/Gallery">Galeri</a></li>
 							<li><a href="/Contact">İletişim</a></li>
 							<li><a href="#">EN</a></li>
+ 
 						</ul>
 					</nav>
 					<div class="ft-header-cta-btn">

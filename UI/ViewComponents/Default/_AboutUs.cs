@@ -1,15 +1,20 @@
-﻿using Business.Concrete;
-using Data.EF;
+﻿using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UI.ViewComponents.Default
 {
-    public class _AboutUs:ViewComponent
+    public class _AboutUs : ViewComponent
     {
-        AboutUsManager aboutman = new AboutUsManager(new EfAboutUsDal());
+        private readonly IAboutUsService _aboutUsService;
+
+        public _AboutUs(IAboutUsService aboutUsService)
+        {
+            _aboutUsService = aboutUsService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var getir = aboutman.AboutUsGetAll();
+            var getir = _aboutUsService.AboutUsGetAll();
             return View(getir);
         }
     }

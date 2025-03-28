@@ -1,15 +1,20 @@
-﻿using Business.Concrete;
-using Data.EF;
+﻿using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UI.ViewComponents.Default
 {
-    public class _Expertice:ViewComponent
+    public class _Expertice : ViewComponent
     {
-        ExperticeManager experticeManager = new ExperticeManager(new EfExperticeDal());
+        private readonly IExperticeService _experticeService;
+
+        public _Expertice(IExperticeService experticeService)
+        {
+            _experticeService = experticeService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var getir = experticeManager.ExperticeGetAll();
+            var getir = _experticeService.ExperticeGetAll();
             return View(getir);
         }
     }

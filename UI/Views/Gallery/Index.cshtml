@@ -1,51 +1,80 @@
 ﻿@using Entity.Concrete
 @model List<Gallery>
 
-<!-- Start of Breadcrumb section
-============================================= -->
+<!-- Start of Breadcrumb section ============================================= -->
 <section id="ft-breadcrumb" class="ft-breadcrumb-section position-relative" style="background-image: url('/ege roro/assets/img/bg/bread-bg.jpg');">
 	<span class="background_overlay"></span>
-	<span class="design-shape position-absolute"><img src="~/ege roro/assets/img/shape/tmd-sh.png" alt=""></span>
+	<span class="design-shape position-absolute">
+		<img src="~/ege roro/assets/img/shape/tmd-sh.png" alt="">
+	</span>
 	<div class="container">
 		<div class="ft-breadcrumb-content headline text-center position-relative">
-			<h2>Hakkımızda</h2>
+			<h2>Galeri</h2>
 			<div class="ft-breadcrumb-list ul-li">
 				<ul>
-					<li><a href="/Service">Hakkımızda</a></li>
-					<li>Hakkımızda</li>
+					<li><a href="/Service">Galeri</a></li>
+					<li>Galeri</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- End of Breadcrumb section
-	============================================= -->
-<!-- Start of Team  page section
-	============================================= -->
+<!-- End of Breadcrumb section ============================================= -->
+<!-- Start of Gallery page section ============================================= -->
 <section id="ft-team-page" class="ft-team-page-section page-padding">
 	<div class="container">
 		<div class="ft-team-content">
 			<div class="row">
-
 				@foreach (var item in Model)
 				{
 					<div class="col-lg-4 col-md-6">
 						<div class="ft-team-inner-itembox position-relative">
 							<div class="ft-team-inner-item-img">
 								<a href="#" class="lightbox-link">
-									<img src="@Url.Content(item.galeriFoto)" alt="hizmet Fotoğrafı">
+									<img src="@Url.Content(item.galeriFoto)" alt="Galeri Fotoğrafı">
 								</a>
 							</div>
-
+							@if (User.Identity.IsAuthenticated)
+							{
+								<!-- Düzenleme butonu -->
+								<button type="button" class="btn btn-sm btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#editModal-@item.GalleryId">
+									<i class="fas fa-edit"></i> Düzenle
+								</button>
+							}
 						</div>
 					</div>
+
+					@if (User.Identity.IsAuthenticated)
+					{
+						<!-- Modal: Düzenleme formu -->
+						<div class="modal fade" id="editModal-@item.GalleryId" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Galeri Düzenle</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+									</div>
+									<div class="modal-body">
+										<form asp-action="UpdateGallery" asp-controller="Gallery" method="post">
+											<input type="hidden" name="GalleryId" value="@item.GalleryId" />
+
+											<div class="mb-3">
+												<label class="form-label">Galeri Fotoğraf URL</label>
+												<input type="text" name="galeriFoto" class="form-control" value="@item.galeriFoto" />
+											</div>
+
+											<!-- Ek alanlar eklemek isterseniz buraya ekleyin -->
+
+											<button type="submit" class="btn btn-success">Güncelle</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
 				}
-
 			</div>
-
 		</div>
 	</div>
 </section>
-<!-- End of Team  page section
-	============================================= -->
-	~/ege roro/assets/img/team/tm3.jpg
+<!-- End of Gallery page section ============================================= -->

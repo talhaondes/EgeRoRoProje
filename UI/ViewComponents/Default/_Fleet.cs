@@ -1,17 +1,21 @@
-﻿using Business.Concrete;
-using Data.EF;
+﻿using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UI.ViewComponents.Default
 {
     public class _Fleet : ViewComponent
     {
-        FleetManager fleetman = new FleetManager(new EfFleetDal());
+        private readonly IFleetService _fleetService;
+
+        public _Fleet(IFleetService fleetService)
+        {
+            _fleetService = fleetService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var getir = fleetman.FleetGetAll();
+            var getir = _fleetService.FleetGetAll();
             return View(getir);
-
         }
     }
 }

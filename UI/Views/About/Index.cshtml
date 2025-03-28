@@ -1,94 +1,161 @@
 ﻿@using Entity.Concrete
 @model List<AboutUs>
 
-<!-- Start of Breadcrumb section
-	============================================= -->
+<!-- Start of Breadcrumb section -->
 <section id="ft-breadcrumb" class="ft-breadcrumb-section position-relative" style="background-image: url('/ege roro/assets/img/bg/bread-bg.jpg');">
-	<span class="background_overlay"></span>
-	<span class="design-shape position-absolute"><img src="~/ege roro/assets/img/shape/tmd-sh.png" alt=""></span>
-	<div class="container">
-		<div class="ft-breadcrumb-content headline text-center position-relative">
-			<h2>Hakkımızda</h2>
-			<div class="ft-breadcrumb-list ul-li">
-				<ul>
-					<li><a href="hakkimizda.html">Hakkımızda</a></li>
-					<li>Hakkımızda</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <span class="background_overlay"></span>
+    <span class="design-shape position-absolute">
+        <img src="~/ege roro/assets/img/shape/tmd-sh.png" alt="">
+    </span>
+    <div class="container">
+        <div class="ft-breadcrumb-content headline text-center position-relative">
+            <h2>Hakkımızda</h2>
+            <div class="ft-breadcrumb-list ul-li">
+                <ul>
+                    <li><a href="/About">Hakkımızda</a></li>
+                    <li>Hakkımızda</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
-<!-- End of Breadcrumb section
-	============================================= -->
+<!-- End of Breadcrumb section -->
+
 <section id="ft-about-2" class="ft-about-section-2">
-	<div class="container">
-		<div class="ft-about-content-2">
-			<div class="row">
-				@foreach (var item in Model)
-				{
-					<div class="col-lg-6">
-						<div class="ft-about-text-wrapper-2">
-							<div class="ft-section-title-2 headline pera-content">
-								<h2>
-									@item.HakkimizdaBaslik1
-								</h2>
+    <div class="container">
+        <div class="ft-about-content-2">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-6">
+                        <div class="ft-about-text-wrapper-2">
+                            <div class="ft-section-title-2 headline pera-content">
+                                <h2>
+                                    @item.HakkimizdaBaslik1
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#editModal-@item.AboutUsId">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    }
+                                </h2>
 
-								<p>
-									@item.HakkimizdaAciklama1
-								</p>
+                                <p>
+                                    @item.HakkimizdaAciklama1
+                                </p>
 
-								<h2 class="mt-10">
-									@item.HakkimizdaBaslik2
-								</h2>
+                                <h2 class="mt-10">
+                                    @item.HakkimizdaBaslik2
+                                </h2>
 
-								<ul class="list-about">
-									@foreach (var aciklama in item.HakkimizdaAciklama2.Split(';'))
-									{
-										<li>@aciklama.Trim()</li>
-									}
-								</ul>
+                                <ul class="list-about">
+                                    @foreach (var aciklama in item.HakkimizdaAciklama2.Split(';'))
+                                    {
+                                        <li>@aciklama.Trim()</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-lg-6">
+                        <div class="ft-about-img-2-wrapper position-relative">
+                            <span class="ft-about-shape1 position-absolute">
+                                <img src="@Url.Content(item.koseFoto1)" alt="Köşe Fotoğrafı 1">
+                            </span>
+                            <span class="ft-about-shape2 position-absolute">
+                                <img src="@Url.Content(item.koseFoto2)" alt="Köşe Fotoğrafı 2">
+                            </span>
+                            <div class="ft-about-img-2">
+                                <img src="@Url.Content(item.HakkimizdaFoto)" alt="Hakkımızda Fotoğrafı">
+                            </div>
+                        </div>
+                    </div>
 
+                    @* Modal: Yalnızca giriş yapmış kullanıcılar için görünür *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="modal fade" id="editModal-@item.AboutUsId" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Hakkımızda ve İlkelerimizi Düzenle</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                                    </div>
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        <form asp-action="UpdateAbout" asp-controller="About" method="post">
+                                            <input type="hidden" name="AboutUsId" value="@item.AboutUsId" />
 
-							</div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Başlık 1</label>
+                                                <input type="text" name="HakkimizdaBaslik1" class="form-control" value="@item.HakkimizdaBaslik1" />
+                                            </div>
 
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="ft-about-img-2-wrapper position-relative">
-							<span class="ft-about-shape1 position-absolute">
-								<img src="@Url.Content(item.koseFoto1)" alt="köşe1 Fotoğrafı">
-							</span>
-							<span class="ft-about-shape2 position-absolute">
-								<img src="@Url.Content(item.koseFoto2)" alt="köşe2 Fotoğrafı">
-							</span>
-							<div class="ft-about-img-2">
-								<img src="@Url.Content(item.HakkimizdaFoto)" alt="hizmet Fotoğrafı">
-							</div>
-						</div>
-					</div>
-				}
+                                            <div class="mb-3">
+                                                <label class="form-label">Açıklama 1</label>
+                                                <textarea name="HakkimizdaAciklama1" rows="4" class="form-control">@item.HakkimizdaAciklama1</textarea>
+                                            </div>
 
-			</div>
-		</div>
-	</div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Başlık 2</label>
+                                                <input type="text" name="HakkimizdaBaslik2" class="form-control" value="@item.HakkimizdaBaslik2" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Açıklama 2 (her maddeyi ; ile ayırın)</label>
+                                                <textarea name="HakkimizdaAciklama2" rows="4" class="form-control">@item.HakkimizdaAciklama2</textarea>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Hakkımızda Fotoğraf (URL)</label>
+                                                <input type="text" name="HakkimizdaFoto" class="form-control" value="@item.HakkimizdaFoto" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Anasayfa Fotoğraf (URL)</label>
+                                                <input type="text" name="anasayfaFoto" class="form-control" value="@item.anasayfaFoto" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Köşe Fotoğraf 1 (URL)</label>
+                                                <input type="text" name="koseFoto1" class="form-control" value="@item.koseFoto1" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Köşe Fotoğraf 2 (URL)</label>
+                                                <input type="text" name="koseFoto2" class="form-control" value="@item.koseFoto2" />
+                                            </div>
+
+                                            <button type="submit" class="btn btn-success">Güncelle</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </section>
+
 <section id="ft-video" class="ft-video-section">
-	<div class="container">
-		<div class="ft-video-content position-relative">
-			<div class="ft-video-img-play-btn">
-				<div class="ft-video-img">
-					<img src="~/ege roro/assets/img/bg/v-bg.jpg" alt="">
-				</div>
-				<div class="ft-video-play">
-					<a class="d-flex justify-content-center align-items-center position-relative video_box" href="https://www.youtube.com/watch?v=C4jjFanHZo8">
-						<i class="fas fa-play"></i>
-						<span class="video_btn_border border_wrap-1"></span>
-						<span class="video_btn_border border_wrap-2"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="ft-video-content position-relative">
+            <div class="ft-video-img-play-btn">
+                <div class="ft-video-img">
+                    <img src="~/ege roro/assets/img/bg/v-bg.jpg" alt="">
+                </div>
+                <div class="ft-video-play">
+                    <a class="d-flex justify-content-center align-items-center position-relative video_box" href="https://www.youtube.com/watch?v=C4jjFanHZo8">
+                        <i class="fas fa-play"></i>
+                        <span class="video_btn_border border_wrap-1"></span>
+                        <span class="video_btn_border border_wrap-2"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-

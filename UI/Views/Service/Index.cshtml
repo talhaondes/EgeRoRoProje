@@ -1,11 +1,12 @@
 ﻿@using Entity.Concrete
 @model List<Service>
 
-<!-- Start of Breadcrumb section
-============================================= -->
+<!-- Start of Breadcrumb section -->
 <section id="ft-breadcrumb" class="ft-breadcrumb-section position-relative" style="background-image: url('/ege roro/assets/img/bg/bread-bg.jpg');">
 	<span class="background_overlay"></span>
-	<span class="design-shape position-absolute"><img src="/ege roro/assets/img/shape/tmd-sh.png" alt=""></span>
+	<span class="design-shape position-absolute">
+		<img src="/ege roro/assets/img/shape/tmd-sh.png" alt="">
+	</span>
 	<div class="container">
 		<div class="ft-breadcrumb-content headline text-center position-relative">
 			<h2>Hizmetlerimiz</h2>
@@ -18,13 +19,10 @@
 		</div>
 	</div>
 </section>
-<!-- End of Breadcrumb section
-	============================================= -->
-<!-- Start of Service page section
-	============================================= -->
+<!-- End of Breadcrumb section -->
+<!-- Start of Service page section -->
 <section id="ft-service-page" class="ft-service-page-section page-padding">
 	<div class="container">
-
 		<div class="ft-service-page-items">
 			<div class="row">
 				@foreach (var item in Model)
@@ -33,11 +31,19 @@
 						<div class="ft-service-innerbox-2 position-relative">
 							<div class="ft-service-img text-center">
 								<a href="/Service/Detail/@item.ServiceId">
-									<img src="@Url.Content(item.HizmetFoto)" alt="hizmet Fotoğrafı">
+									<img src="@Url.Content(item.HizmetFoto)" alt="Hizmet Fotoğrafı">
 								</a>
 							</div>
 							<div class="ft-service-text position-relative headline">
-								<h3><a href="/Service/Detail/@item.ServiceId">@item.HizmetAdi</a></h3>
+								<h3>
+									<a href="/Service/Detail/@item.ServiceId">@item.HizmetAdi</a>
+									@if (User.Identity.IsAuthenticated)
+									{
+										<button type="button" class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#editModal-@item.ServiceId">
+											<i class="fas fa-edit"></i>
+										</button>
+									}
+								</h3>
 								<div class="ft-btn-2">
 									<a href="/Service/Detail/@item.ServiceId">
 										<i class="icon-first flaticon-right-arrow"></i>
@@ -51,18 +57,46 @@
 						</div>
 					</div>
 
+					@if (User.Identity.IsAuthenticated)
+					{
+						<div class="modal fade" id="editModal-@item.ServiceId" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Hizmeti Düzenle</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+									</div>
+									<div class="modal-body">
+										<form asp-action="UpdateService" asp-controller="Service" method="post">
+											<input type="hidden" name="ServiceId" value="@item.ServiceId" />
+
+											<div class="mb-3">
+												<label class="form-label">Hizmet Adı</label>
+												<input type="text" name="HizmetAdi" class="form-control" value="@item.HizmetAdi" />
+											</div>
+
+											<div class="mb-3">
+												<label class="form-label">Hizmet Fotoğrafı (URL)</label>
+												<input type="text" name="HizmetFoto" class="form-control" value="@item.HizmetFoto" />
+											</div>
+
+											<div class="mb-3">
+												<label class="form-label">Servis Numarası</label>
+												<input type="text" name="serviceNo" class="form-control" value="@item.serviceNo" />
+											</div>
+
+											<!-- İhtiyacınıza göre ek alanlar ekleyebilirsiniz -->
+
+											<button type="submit" class="btn btn-success">Güncelle</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
 				}
-
-
-
-
-
 			</div>
-
-
-
 		</div>
 	</div>
 </section>
-<!-- End of Service page section
-	============================================= -->
+<!-- End of Service page section -->

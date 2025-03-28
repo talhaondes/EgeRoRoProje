@@ -1,15 +1,13 @@
 ﻿using Entity.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Concrete
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<ApplicationUser>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        public Context(DbContextOptions<Context> options) : base(options) { }
 
-            optionsBuilder.UseSqlServer("Server = LENOVO\\SQLEXPRESS; Database = RoRoDatabase; Trusted_Connection = True;");
-        }
         public DbSet<Crew> Crews { get; set; }
         public DbSet<Fleet> Fleets { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
